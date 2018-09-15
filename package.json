@@ -1,0 +1,19 @@
+{
+  "name": "ow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakeneels/OW-scraper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakeneels/OW-scraper/issues"
+  },
+  "homepage": "https://github.com/jakeneels/OW-scraper#readme"
+}
