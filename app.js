@@ -9,7 +9,7 @@ const cheerio = require('cheerio');
 //
 // $.html();
 
-let url = 'https://www.winstonslab.com/teams/team.php?id=334';
+let url = 'https://www.winstonslab.com/teams/team.php?id=337';
 let url1 = 'https://www.overbuff.com/esports'; //https://masteroverwatch.com/news/107-how-to-pick-your-overwatch-league-team
 let url2 = 'https://overwatchleague.com/en-us/stats'; // you can change to EU and asia i presume
 let url3 = 'https://overwatchleague.com/en-us/players/4652/ark';// recent matches
