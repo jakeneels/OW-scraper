@@ -1,4 +1,3 @@
-
 const request = require('request');
 const fakeUa = require('fake-useragent');
 const cheerio = require('cheerio');
@@ -12,6 +11,7 @@ const cheerio = require('cheerio');
 let url = 'https://www.winstonslab.com/teams/team.php?id=328';
 
 let team = require('./models/team.js');
+let url = 'https://overwatchleague.com/en-us/players/4142/agilities';
 console.log(team);
 let url = 'https://www.winstonslab.com/teams/team.php?id=337';
 
@@ -20,20 +20,10 @@ let url2 = 'https://overwatchleague.com/en-us/stats'; // you can change to EU an
 let url3 = 'https://overwatchleague.com/en-us/players/4652/ark';// recent matches
 let verb = 'get';
 
-let params = {
-  url,
-  headers: ''
-};
 
-
-request.get(params, (err, req, body) => { //todo fake the header
+request.get(url, (err, req, body) => { //todo fake the header
   console.log(body);
   // console.log(req);
 });
 
-//
-// request.get(url, (err, req, body) => { //todo fake the header
-//   console.log(body);
-//   // console.log(req);
-// });
 
