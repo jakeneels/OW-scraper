@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jakeneels/OW-scraper/issues"
   },
-  "homepage": "https://github.com/jakeneels/OW-scraper#readme"
+  "homepage": "https://github.com/jakeneels/OW-scraper#readme",
+  "dependencies": {
+    "puppeteer": "^1.8.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
 }
