@@ -65,7 +65,7 @@ for (let key in player.stats.chars) {
       player.stats.chars[key].timePlayed = char.timePlayed;
       player.stats.chars[key].playPercentage = char.playPercentage;
     }
-  })
+  }) // todo soldir 69 fix
 }
 console.log(player.stats.chars);
 console.log(('25m 7s' < '0h 0m 0s'));
