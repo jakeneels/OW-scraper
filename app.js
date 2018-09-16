@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 //const puppeteer = require('puppeteer');
 
 
-let team = require('./models/team.js');
+// let team = require('./models/team.js');
 let player = require('./models/player.js');
 let url = 'https://overwatchleague.com/en-us/players/4142/agilities';
 let url1 = 'https://www.overbuff.com/esports'; //https://masteroverwatch.com/news/107-how-to-pick-your-overwatch-league-team
@@ -41,9 +41,42 @@ let selTimePlayed = `.u-text-right:not(${statsOverviewTitle}):not(${selNames}):n
 let selPercentPlayed = `.Table-data--emphasized:not(${statsOverviewTitle})`;
 
 
-scrapeCharsData(selNames);
-scrapeCharsData(selTimePlayed, 's');
-scrapeCharsData(selPercentPlayed, '%');
+let charArr = [];
+let tempChar = {};
+let charNames = scrapeCharsData(selNames);
+let timePlayed = scrapeCharsData(selTimePlayed, 's');
+let percentPlayedstat = scrapeCharsData(selPercentPlayed, '%');
+
+
+for (let i = 0; i < charNames.length; i++) {
+  charArr.push({
+    name: charNames[i],
+    timePlayed: timePlayed[i],
+    playPercentage: percentPlayedstat[i]
+  });
+  
+  // console.log(charArr)
+}
+for (let key in player.stats.chars) {
+  // console.log(key);
+  charArr.forEach((char) => {
+    if (key == char.name) {
+      player.stats.chars[key].timePlayed = char.timePlayed;
+      player.stats.chars[key].playPercentage = char.playPercentage;
+    }
+  }) // todo soldir 69 fix
+}
+console.log(player.stats.chars);
+console.log(('25m 7s' < '0h 0m 0s'));
+
+
+
+timePlayed.forEach((time) => {
+  Object.keys(player.stats.chars).forEach((charName) => {
+  
+  });
+});
+
 
 //////////////////scraping function/////////////////////////////
 function scrapeCharsData(selector, onlyIncluding) {

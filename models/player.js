@@ -4,116 +4,115 @@ module.exports = {
   stats: {
     chars: {
       dva: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0,
-        
       },
       orisa: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       reinhardt: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       roadhog: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       winston: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       wreckingBall: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       zarya: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       bastion: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       doomfist: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       genji: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       hanzo: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       junkrat: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       mcCree: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       mei: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       pharah: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       reaper: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       soldier76: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       sombra: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       symmetra: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       torbjorn: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       tracer: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       widowmaker: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       ana: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       brigitte: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       lucio: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       mercy: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       moira: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       },
       zenyatta: {
-        timePLayed: 'HH:mm:ss',
+        timePlayed: '0h 0m 0s',
         playPercentage: 0.0
       }
     },
