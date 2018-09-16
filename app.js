@@ -21,9 +21,9 @@ let url3 = 'https://overwatchleague.com/en-us/players/4652/ark';// recent matche
 let verb = 'get';
 
 
-request.get(url, (err, req, body) => { //todo fake the header
-  console.log(body);
-  // console.log(req);
-});
+// request.get(url, (err, req, body) => { //todo fake the header
+//   console.log(body);
+//   // console.log(req);
+// });
 
 
