@@ -1,7 +1,7 @@
 module.exports = {
     name: 'LA',
       stats:{
-      winPercentsByMap:[
+      maps:[
         // {nubani: '56'},
       ],
     players: [
