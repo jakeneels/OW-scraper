@@ -28,18 +28,43 @@ let verb = 'get';
 let html = require('./scrapeExamples/example.js');
 
 const $ = cheerio.load(html);
-console.log('.Table-data--extended',);
-console.log(
-  $('.Table-data--extended').text() + '\n'
-);
-console.log(
-  $('.u-text-right').text() + '\n'
-);
 
+// console.log(
+//   $('.Table-data--extended').text() + '\n'
+// );4
+let ghostWords = ['time played', '% played'];
+let statsOverviewTitle = '.Table-header--compact';
+let percentPlayed = '.Table-data--emphasized';
+let uTextRight = '.u-text-right';
 
-$.html();
-console.log('\n\n\n\n')
-console.log(player.stats.damage)
+//selectors
+let selNames = '.Table-data--extended';
+let selTimePlayed = `.u-text-right:not(${statsOverviewTitle}):not(${selNames}):not(${percentPlayed})`;
+let selPercentPlayed = `.Table-data--emphasized:not(${statsOverviewTitle})`;
+let player = {};
+
+let charNames = scrapeCharsData(selNames);
+charNames.forEach((name)=>{
+  player.chars[name]
+})
+scrapeCharsData(selTimePlayed, 's');
+scrapeCharsData(selPercentPlayed, '%');
+
+function scrapeCharsData(selector, onlyIncluding) {
+  let result = [];
+  $(selector).each(function (i, e) {
+    let content = e.children[0].data.toLowerCase();
+    if (onlyIncluding != null) {
+      if(content.includes(onlyIncluding))
+      {result.push(content);}
+    } else {
+      result.push(content);
+    }
+  });
+  console.log(result);
+  return result;
+}
+
 
 //
 // request.get(params, (err, req, body) => { //todo fake the header
