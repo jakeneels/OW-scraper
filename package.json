@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jakeneels/OW-scraper#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "puppeteer": "^1.8.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
   }

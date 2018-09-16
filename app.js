@@ -1,10 +1,10 @@
-const request = require('request');
-const fakeUa = require('fake-useragent');
+
 const cheerio = require('cheerio');
-const puppeteer = require('puppeteer');
+//const puppeteer = require('puppeteer');
 
 
 let team = require('./models/team.js');
+let player = require('./models/player.js');
 let url = 'https://overwatchleague.com/en-us/players/4142/agilities';
 let url1 = 'https://www.overbuff.com/esports'; //https://masteroverwatch.com/news/107-how-to-pick-your-overwatch-league-team
 let url2 = 'https://overwatchleague.com/en-us/stats'; // you can change to EU and asia i presume
@@ -38,7 +38,8 @@ console.log(
 
 
 $.html();
-
+console.log('\n\n\n\n')
+console.log(player.stats.damage)
 
 //
 // request.get(params, (err, req, body) => { //todo fake the header
