@@ -45,8 +45,8 @@ let player = {};
 
 let charNames = scrapeCharsData(selNames);
 charNames.forEach((name)=>{
-  player.chars[name]
-})
+  player.chars[name];
+});
 scrapeCharsData(selTimePlayed, 's');
 scrapeCharsData(selPercentPlayed, '%');
 
