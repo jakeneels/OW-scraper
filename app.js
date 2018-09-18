@@ -12,25 +12,25 @@ let verb = 'get';
 async function pullFromOWLeaguePlayerPage() {
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
-
+  
   await page.goto(url2, {waitUntil: 'networkidle2'});
   await page.waitFor(200000);
   // await page.click('.Button--secondary');
- let content = await page.content();
-
-  fs.writeFile("./OLPlayers.html", content, function(err) {
-    if(err) {
+  let content = await page.content();
+  
+  fs.writeFile("./OLPlayers.html", content, function (err) {
+    if (err) {
       return console.log(err);
     }
     
     console.log("The file was saved!");
   });
   // await page.screenshot({path: 'google.png'});
-
+  
   await browser.close();
 }
 
- // pullFromOWLeaguePlayerPage();
+// pullFromOWLeaguePlayerPage();
 //
 // let html = require('./scrapeExamples/example.js');
 //
@@ -42,12 +42,13 @@ async function pullFromOWLeaguePlayerPage() {
 // let statsOverviewTitle = '.Table-header--compact';
 // let percentPlayed = '.Table-data--emphasized';
 // let uTextRight = '.u-text-right';
-//
+let tablePages = '.table-page1, .table-page2, .table-page3, .table-page4, .table-page5, .table-page6';
+
 // //selectors
 // let selNames = '.Table-data--extended';
 // let selTimePlayed = `.u-text-right:not(${statsOverviewTitle}):not(${selNames}):not(${percentPlayed})`;
 // let selPercentPlayed = `.Table-data--emphasized:not(${statsOverviewTitle})`;
-//
+let selheroWinPercentage = `.hero-winrate :not(${tablePages})`;
 //
 // let charArr = [];
 // let tempChar = {};
@@ -91,34 +92,49 @@ let html = require('./scrapeExamples/winston.js');
 const $ = cheerio.load(html);
 //////////////////scraping function/////////////////////////////
 //this is jquery you can google selectors
-let charNameArray = scrapePlayerDataWinston('.hero-name > span', null);
-let playerNameArray = scrapePlayerDataWinston('.hero-player > a', null);
+//let charNameArray = scrapePlayerDataWinston('.hero-name > span', null);
+//let playerNameArray = scrapePlayerDataWinston('.hero-player > a', null);
+//let heroWinPercentageArray = scrapePlayerDataWinston(('.hero-winrate.positive,.hero-winrate.negative'), null); // win rate = timewWon/timePlayed
+//let needsFix1 = scrapePlayerDataWinston('td.table-page1','%') //TODO: take each 3rd element and push it in another array
+                                      //teamKillsPercentageArray = needsFix1[0]
+                                      //teamDeathsPercentage = needsFix[1]
+                                      //garbage1 = needsFix[3]
+let needsFix2 = scrapePlayerDataWinston('.table-avg10.table-page1', null); // TODO:take each 3rd element and push it in another array
+                                      //killsAvgPer10 = needsFix2[0]
+                                      //deathsAvgPer10 = needsFix2[1]
+                                      //killsDividedByDeaths = needsFix2[2]
+                                      //
 
-console.log(charNameArray);
-console.log("\n\n\n\n\n\n\n\n\n\n\n");
-console.log(playerNameArray);
+//console.log(playerNameArray);
+//console.log("\n\n\n\n\n\n\n\n\n\n\n");
+//console.log(charNameArray);
+//console.log("\n\n\n\n\n\n\n\n\n\n\n");
+//console.log(heroWinPercentageArray); TODO:figure out why heroWinPercentage misses one element
 
-function scrapePlayerDataWinston(selector, onlyIncluding) {
+
+function scrapePlayerDataWinston(selector, onlyIncluding ) {
   let playerStatArray = [];
   $(selector).each(function (i, e) {
-    let content = e.children[0].data.toLowerCase();
+    let content = e.children[0].data;
     
-    if (onlyIncluding != null) {
-      if (content.includes(onlyIncluding)) {
+    if (content != undefined) {
+      if (onlyIncluding != null) {
+        if (content.includes(onlyIncluding)) {
+          playerStatArray.push(content);
+        }
+      } else {
         playerStatArray.push(content);
       }
-    } else {
-      playerStatArray.push(content);
     }
   });
-  //console.log(playerStatArray);
+  console.log(playerStatArray);
   return playerStatArray;
 }
 
 function scrapeCharsDataOL(selector, onlyIncluding) {
   let result = [];
-  $(selector).each(function (i, ontent) {
-    let content = ontent.children[0].data.toLowerCase();
+  $(selector).each(function (i, content) {
+    let content = content.children[0].data.toLowerCase();
     if (onlyIncluding != null) {
       if (content.includes(onlyIncluding)) {
         result.push(content);
@@ -130,6 +146,7 @@ function scrapeCharsDataOL(selector, onlyIncluding) {
   console.log(result);
   return result;
 }
+
 ////////////////////////////////////////////////////////////////
 
 
