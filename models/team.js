@@ -2,7 +2,7 @@ module.exports = {
   name: '',
   stats: {
     players: {
-      starter:[],
+      starters:[],
       subs: []
     },
     maps:{
