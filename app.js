@@ -49,34 +49,34 @@ let tablePages = '.table-page1, .table-page2, .table-page3, .table-page4, .table
 // let selTimePlayed = `.u-text-right:not(${statsOverviewTitle}):not(${selNames}):not(${percentPlayed})`;
 // let selPercentPlayed = `.Table-data--emphasized:not(${statsOverviewTitle})`;
 let selheroWinPercentage = `.hero-winrate :not(${tablePages})`;
-//
-// let charArr = [];
-// let tempChar = {};
-// let charNames = scrapeCharsData(selNames);
-// let timePlayed = scrapeCharsData(selTimePlayed, 's');
-// let percentPlayedstat = scrapeCharsData(selPercentPlayed, '%');
-//
-//
-// for (let i = 0; i < charNames.length; i++) {
-//   charArr.push({
-//     name: charNames[i],
-//     timePlayed: timePlayed[i],
-//     playPercentage: percentPlayedstat[i]
-//   });
-//
-//   // console.log(charArr)
-// }
-// for (let key in player.stats.chars) {
-//   // console.log(key);
-//   charArr.forEach((char) => {
-//     console.log(char.name);
-//     (char.name === 'soldier: 76') ? char.name = 'soldier76': null;
-//     if (player.stats.chars.hasOwnProperty(key) && key === char.name) {
-//       player.stats.chars[key].timePlayed = char.timePlayed;
-//       player.stats.chars[key].playPercentage = char.playPercentage;
-//     }
-//   });
-// }
+
+let charArr = [];
+let tempChar = {};
+let charNames = scrapeCharsData(selNames);
+let timePlayed = scrapeCharsData(selTimePlayed, 's');
+let percentPlayedstat = scrapeCharsData(selPercentPlayed, '%');
+
+
+for (let i = 0; i < charNames.length; i++) {
+  charArr.push({
+    name: charNames[i],
+    timePlayed: timePlayed[i],
+    playPercentage: percentPlayedstat[i]
+  });
+
+  // console.log(charArr)
+}
+for (let key in player.stats.chars) {
+  // console.log(key);
+  charArr.forEach((char) => {
+    console.log(char.name);
+    (char.name === 'soldier: 76') ? char.name = 'soldier76': null;
+    if (player.stats.chars.hasOwnProperty(key) && key === char.name) {
+      player.stats.chars[key].timePlayed = char.timePlayed;
+      player.stats.chars[key].playPercentage = char.playPercentage;
+    }
+  });
+}
 // console.log(player.stats.chars);
 // console.log(('25m 7s' < '0h 0m 0s'));
 //
@@ -116,7 +116,6 @@ function scrapePlayerDataWinston(selector, onlyIncluding ) {
   let playerStatArray = [];
   $(selector).each(function (i, e) {
     let content = e.children[0].data;
-    
     if (content != undefined) {
       if (onlyIncluding != null) {
         if (content.includes(onlyIncluding)) {
@@ -138,7 +137,7 @@ function scrapeCharsDataOL(selector, onlyIncluding) {
     if (onlyIncluding != null) {
       if (content.includes(onlyIncluding)) {
         result.push(content);
-      }
+    }
     } else {
       result.push(content);
     }
