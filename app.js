@@ -29,15 +29,6 @@ async function pullFromURL() {
   await browser.close();
 }
 
-// for (let i = 0; i < charNames.length; i++) {
-//   charArr.push({
-//     name: charNames[i],
-//     timePlayed: timePlayed[i],
-//     playPercentage: percentPlayedstat[i]
-//   });
-//
-//   // console.log(charArr)
-// }
 // for (let key in player.stats.chars) {
 //   // console.log(key);
 //   charArr.forEach((char) => {
@@ -125,14 +116,22 @@ const $ = cheerio.load(html);
 /////////selectors//////////
 //////////////////////////////////
 //let playerName = scrapeCharsDataOL('.PlayerHandle-handle',null);
-//let championsPlayedArray = scrapeCharsDataOL('.Table-data.Table-data--extended.u-uppercase',null);
-//let  percentageChampPlayedArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right.u-text-nowrap',null);
-//let timeChampPlayedArray = scrapeCharsDataOL('.Table-data.u-text-right.u-text-nowrap','s');
+let championsPlayedArray = scrapeCharsDataOL('.Table-data.Table-data--extended.u-uppercase',null);
+let  percentageChampPlayedArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right.u-text-nowrap',null);
+let timeChampPlayedArray = scrapeCharsDataOL('.Table-data.u-text-right.u-text-nowrap','s');
 //let numbersStats10MinArray = ['damage','healing','finalBlows','elims','deaths'];
 //let scrapedNumbersStats10MinArray = scrapeCharsDataOL('.Table-data.u-text-right:not(.Table-data--emphasized):not(.u-text-nowrap)',null);
                                                                       //TODO:match numbersStatsArray with this array to get teach value on it's own.
-let numbersStatsLeagueRankArray = scrapeCharsDataOL()
-
+//let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)')
+charArr = [];
+for (let i = 0; i < championsPlayedArray.length; i++) {
+  charArr.push({
+    name: championsPlayedArray[i],
+    timePlayed: timeChampPlayedArray[i],
+    playPercentage: percentageChampPlayedArray[i]
+  });
+};
+console.log(charArr)
 function scrapeCharsDataOL(selector, onlyIncluding) {
   let result = [];
   $(selector).each(function (i, content) {
@@ -145,7 +144,7 @@ function scrapeCharsDataOL(selector, onlyIncluding) {
       result.push(content1);
     }
   });
-  console.log(result);
+ // console.log(result);
   return result;
 }
 ////////////////////////////////////////////////////////////////
