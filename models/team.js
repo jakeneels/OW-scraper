@@ -38,7 +38,7 @@ module.exports = {
       },
       ilios: {
         winPercentage: 0.0,
-        matchesPlayed: 0.0
+        matchesPlayed: 0.0,
         timePlayed: 0.0
       },
       junkertown: {
@@ -53,7 +53,7 @@ module.exports = {
       },
       lijiangTower: {
         winPercentage: 0.0,
-        matchesPlayed: 0.0
+        matchesPlayed: 0.0,
         timePlayed: 0.0
       },
       nepal: {

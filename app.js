@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 let fs = require('fs');
-//let player = require('./models/player.js');
+let player = require('./models/player.js');
 let url = 'https://overwatchleague.com/en-us/players/4142/agilities';
 let url3 ='https://overwatchleague.com/en-us/teams'
 let url2 = 'https://www.winstonslab.com/customquery/comparePlayers/?dateGreater=2018-05-01&dateSmaller=2018-09-01&event%5B%5D=86&specificMatchupTeam1=0&specificMatchupTeam2=0&team%5B%5D=&player%5B%5D=&time=0&alloreach=2&maptype%5B%5D=&map%5B%5D=&roundtype%5B%5D=&statsBy=1&heroes=';
@@ -29,20 +29,6 @@ async function pullFromURL() {
   await browser.close();
 }
 
-// for (let key in player.stats.chars) {
-//   // console.log(key);
-//   charArr.forEach((char) => {
-//     console.log(char.name);
-//     (char.name === 'soldier: 76') ? char.name = 'soldier76': null;
-//     if (player.stats.chars.hasOwnProperty(key) && key === char.name) {
-//       player.stats.chars[key].timePlayed = char.timePlayed;
-//       player.stats.chars[key].playPercentage = char.playPercentage;
-//     }
-//   });
-// }
-// console.log(player.stats.chars);
-// console.log(('25m 7s' < '0h 0m 0s'));
-//
 // timePlayed.forEach((time) => {
 //   Object.keys(player.stats.chars).forEach((charName) => {
 //
@@ -64,7 +50,6 @@ async function pullFromURL() {
 // let selPercentPlayed = `.Table-data--emphasized:not(${statsOverviewTitle})`;
 //let selheroWinPercentage = `.hero-winrate :not(${tablePages})`;
 //
-// let charArr = [];
 // let tempChar = {};
 // let charNames = scrapeCharsData(selNames);
 // let timePlayed = scrapeCharsData(selTimePlayed, 's');
@@ -111,27 +96,41 @@ function scrapePlayerDataWinston(selector, onlyIncluding ) {
 /////////////////////////scraping OWL function/////////////////////////
 ///////////get the html///////////
 let html = require('./scrapeExamples/example.js');
-const $ = cheerio.load(html);
-//////////////////////////////////
+const $ = cheerio.load(html);//
 /////////selectors//////////
 //////////////////////////////////
 //let playerName = scrapeCharsDataOL('.PlayerHandle-handle',null);
+let charArr = [];
 let championsPlayedArray = scrapeCharsDataOL('.Table-data.Table-data--extended.u-uppercase',null);
 let  percentageChampPlayedArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right.u-text-nowrap',null);
 let timeChampPlayedArray = scrapeCharsDataOL('.Table-data.u-text-right.u-text-nowrap','s');
 //let numbersStats10MinArray = ['damage','healing','finalBlows','elims','deaths'];
 //let scrapedNumbersStats10MinArray = scrapeCharsDataOL('.Table-data.u-text-right:not(.Table-data--emphasized):not(.u-text-nowrap)',null);
-                                                                      //TODO:match numbersStatsArray with this array to get teach value on it's own.
+//                                                                    //TODO:match numbersStatsArray with this array to get teach value on it's own.
 //let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)')
-charArr = [];
+
 for (let i = 0; i < championsPlayedArray.length; i++) {
   charArr.push({
-    name: championsPlayedArray[i],
+    name: championsPlayedArray[i].toLowerCase(),
     timePlayed: timeChampPlayedArray[i],
     playPercentage: percentageChampPlayedArray[i]
   });
-};
-console.log(charArr)
+}
+ //console.log(charArr);
+
+for (let key in player.stats.chars) {
+  //console.log(key);
+  charArr.forEach((char) => {
+    //console.log(char.name);
+    (char.name === 'soldier: 76') ? char.name = 'soldier76': null;
+    if (key === char.name) {
+      player.stats.chars[key].timePlayed = char.timePlayed;
+      player.stats.chars[key].playPercentage = char.playPercentage;
+    }
+  });
+}
+//console.log(player.stats.chars.genji)
+
 function scrapeCharsDataOL(selector, onlyIncluding) {
   let result = [];
   $(selector).each(function (i, content) {
@@ -147,6 +146,8 @@ function scrapeCharsDataOL(selector, onlyIncluding) {
  // console.log(result);
   return result;
 }
+
+
 ////////////////////////////////////////////////////////////////
 
 
