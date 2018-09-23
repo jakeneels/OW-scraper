@@ -22,15 +22,15 @@ exports.winstonCharPlayer = ()=> {
 // killsDividedByDeaths = needsFix2[2];
   let killsDeathsPer10min = util.scrapeData('.table-avg10.table-page1.positive,.table-avg10.table-page1.negative', null);
 // gets only red and green numbers
-  console.log(playerNameArray);
-  console.log("\n\n\n\n\n\n\n\n\n\n\n");
-  console.log(charNameArray);
-  console.log("\n\n\n\n\n\n\n\n\n\n\n");
-  console.log(heroWinPercentageArray);
-  /*TODO:figure out why heroWinPercentage misses one element*/
+ // console.log(playerNameArray);
+ // console.log("\n\n\n\n\n\n\n\n\n\n\n");
+ // console.log(charNameArray);
+ // console.log("\n\n\n\n\n\n\n\n\n\n\n");
+ // console.log(heroWinPercentageArray);
+ // /*TODO:figure out why heroWinPercentage misses one element*/
 };
 
-exports.olCharPlayer = ()=> {
+exports.olCharPlayer = ()=> //{
   util.setScrapeSource('./scrapeExamples/example.js');
   let charArr = [];
   let playerName = util.scrapeData('.PlayerHandle-handle',null);
@@ -71,7 +71,7 @@ exports.olCharPlayer = ()=> {
     });
   }
   console.log(player.stats.chars);
-  return player;
+  return player
 };
 
 exports.akshonMatchTeam = () =>{
