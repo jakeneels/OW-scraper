@@ -1,10 +1,11 @@
+'use strict';
 const cheerio = require('cheerio');
-
 const puppeteer = require('puppeteer');
 let fs = require('fs');
 let html;
 let $;
-
+//////////////////////cheerio
+/////////////////////////////
 exports.setScrapeSource = (source) => {
   html = require(source);
   $ = cheerio.load(html);
@@ -29,6 +30,7 @@ exports.scrapeData = function scrapeData(selector, onlyIncluding) {
   //console.log(playerStatArray);
   return playerStatArray;
 };
+
 
 exports.getSourceCode = async (url) => {
   let method;
@@ -57,14 +59,37 @@ exports.getSourceCode = async (url) => {
 
   let content = await page.content();
   //
-  // fs.writeFile("./AKSHON.html", content, function (err) {
-  //   if (err) {
-  //     return console.log(err);
-  //   }
-  //
-  // });
+  //fs.writeFile("./AKSHON.html", content, function (err) {
+  //  if (err) {
+  //    return console.log(err);
+  //  }//
+    //
+  //});
   
   await browser.close();
   return content;
 };
+
+
+///////////scraping function
+////////////////////////////
+exports.scrapeData = function scrapeData(selector, onlyIncluding) {
+  let result = [];
+  $(selector).each(function (i, e) {
+    let content = e.children[0].data;
+    if (content != undefined) {
+      if (onlyIncluding != null) {
+        if (content.includes(onlyIncluding)) {
+          result.push(content);
+        }
+      } else {
+        result.push(content);
+      }
+    }
+  });
+  //console.log(result);
+  return result;
+};
+
+
 

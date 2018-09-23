@@ -84,3 +84,26 @@ exports.olCharPlayer = () => {
   return player;
 };
 
+exports.akshonMatchTeam = () =>{
+  ///////helpers////////////////
+  let matchDiffPos = scrapeData('.border-right.positive > span', null);
+  let matchDiffNeg = scrapeData('.border-right.negative >span', null);
+  let mapDiffPos = scrapeData('.positive:not(.border-right) > span',null);
+  let mapDiffNeg = scrapeData('.negative:not(.border-right) > span',null);
+  let totalGames = '40';
+  //////variables///////////////
+  let teams = scrapeData('.full-name',null);
+  let matchDiff = matchDiffPos.concat(matchDiffNeg);
+  let matchWinArr = [];
+  for (let i = 0; i<matchDiff.length; i++){
+    let matchWin = totalGames- (totalGames-(matchDiff[i])) / 2;
+    matchWinArr.push(matchWin)
+  }
+  let matchLossArr = [];
+  for (let i = 0; i<matchDiff.length; i++){
+    let matchLoss = (totalGames-(matchDiff[i])) / 2;
+    matchLossArr.push(matchLoss)
+  }
+  let matchMapDiff = mapDiffPos.concat(mapDiffNeg);
+}
+
