@@ -25,6 +25,7 @@ exports.scrapeData = function scrapeData(selector, onlyIncluding) {
       }
     }
   });
+  console.log(playerStatArray);
   //console.log(playerStatArray);
   return playerStatArray;
 };

@@ -2,8 +2,8 @@
 let player = require('./models/player.js');
 let scrape = require('./scrape.js');
 
-let scrapeData = scrape.winstonCharPlayer();
-// let scrapeData = scrape.olCharPlayer();
+// let scrapeData = scrape.winstonCharPlayer();
+let scrapeData = scrape.olCharPlayer();
 
 let charArr = [];
  // TODO:match numbersStatsArray with this array to get teach value on it's own.
