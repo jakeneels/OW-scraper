@@ -62,7 +62,7 @@ async function pullFromURL() {
 //let needsFix1 = scrapePlayerDataWinston('td.table-page1','%') //TODO: take each 3rd element and push it in another array
                                       //teamKillsPercentageArray = needsFix1[0]
                                       //teamDeathsPercentage = needsFix[1]
-                                      //garbage1 = needsFix[3]
+                                      //garbage1 = needsFix[2]
 //let needsFix2 = scrapePlayerDataWinston('.table-avg10.table-page1', null); // TODO:take each 3rd element and push it in another array
                                       //killsAvgPer10 = needsFix2[0]
                                       //deathsAvgPer10 = needsFix2[1]
@@ -143,7 +143,7 @@ function scrapeCharsDataOL(selector, onlyIncluding) {
       result.push(content1);
     }
   });
- // console.log(result);
+ //console.log(result);
   return result;
 }
 

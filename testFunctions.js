@@ -43,24 +43,44 @@ let totalGames = '40';
 //////variables
 ///////////////
 let teams = scrapeAkshon('.full-name',null);
-//console.log(teams);
 let matchDiff = matchDiffPos.concat(matchDiffNeg);
- // console.log(matchDiff);
 let matchWinArr = []
 for (let i =0;i<matchDiff.length;i++){
   let matchWin = totalGames- (totalGames-(matchDiff[i])) /2
   matchWinArr.push(matchWin)
 }
-//console.log(matchWinArr);
 let matchLossArr = [];
 for (let i =0;i<matchDiff.length;i++){
   let matchLoss = (totalGames-(matchDiff[i])) /2
   matchLossArr.push(matchLoss)
 }
-//console.log(matchLossArr);
-let mapDiff = mapDiffPos.concat(mapDiffNeg)//diff = win - loss => teh bigger the number,the less the losses.
-//console.log(mapDiff);
-//////////////////
+let mapDiff = mapDiffPos.concat(mapDiffNeg)//diff = win - loss => the bigger the number,the less the losses.
+
+//////////////////logs
+//////////////////////
+console.log(teams);
+console.log(matchDiff);
+console.log(matchWinArr);
+console.log(matchLossArr);
+console.log(mapDiff);
+
+//////////////setting the team object
+////////////////////////////////////
+for (let i = 0; i < championsPlayedArray.length; i++) {
+  charArr.push({
+    name: teams[i].toLowerCase(),
+    timePlayed: matchDiff[i],
+    playPercentage: matchWinArr[i],
+    smth: matchLossArr[i],
+    smth2:mapDiff[i]
+  });
+}
+
+
+
+
+
+
 
 
 
@@ -68,6 +88,7 @@ let mapDiff = mapDiffPos.concat(mapDiffNeg)//diff = win - loss => teh bigger the
 
 
 ///////////scraping function
+////////////////////////////
 function scrapeAkshon(selector, onlyIncluding) {
   let result = [];
   $(selector).each(function (i, content) {
