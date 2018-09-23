@@ -115,14 +115,14 @@ let needsFix2 = scrapePlayerDataWinston('.table-avg10.table-page1', null); // TO
 function scrapePlayerDataWinston(selector, onlyIncluding ) {
   let playerStatArray = [];
   $(selector).each(function (i, e) {
-    let content = e.children[0].data;
-    if (content != undefined) {
+    let contentW = e.children[0].data;
+    if (contentW != undefined) {
       if (onlyIncluding != null) {
-        if (content.includes(onlyIncluding)) {
-          playerStatArray.push(content);
+        if (contentW.includes(onlyIncluding)) {
+          playerStatArray.push(contentW);
         }
       } else {
-        playerStatArray.push(content);
+        playerStatArray.push(contentW);
       }
     }
   });
@@ -132,14 +132,14 @@ function scrapePlayerDataWinston(selector, onlyIncluding ) {
 
 function scrapeCharsDataOL(selector, onlyIncluding) {
   let result = [];
-  $(selector).each(function (i, content) {
-    let content = content.children[0].data.toLowerCase();
+  $(selector).each(function (i, e) {
+    let contentOL = e.children[0].data.toLowerCase();
     if (onlyIncluding != null) {
-      if (content.includes(onlyIncluding)) {
-        result.push(content);
+      if (contentOL.includes(onlyIncluding)) {
+        result.push(contentOL);
     }
     } else {
-      result.push(content);
+      result.push(contentOL);
     }
   });
   console.log(result);
