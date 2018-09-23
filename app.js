@@ -4,8 +4,8 @@ let scrape = require('./scrape.js');
 let team =require('./models/team.js');
 
 let scrapeData = scrape.winstonCharPlayer();
-let scrapeData = scrape.olCharPlayer();
-let scrapeData = scrape.akshonMatchTeam();
+ scrapeData = scrape.olCharPlayer();
+ // scrapeData = scrape.akshonMatchTeam();
 
 let charArr = [];
  // TODO:match numbersStatsArray with this array to get teach value on it's own.
