@@ -1,5 +1,6 @@
 'use strict';
 const util = require('./util.js');
+let player = require('./models/player.js');
 
 /////////////////////scrapeWinston'sLab
 
@@ -27,20 +28,21 @@ exports.winstonCharPlayer = ()=> {
   console.log("\n\n\n\n\n\n\n\n\n\n\n");
   console.log(heroWinPercentageArray);
   /*TODO:figure out why heroWinPercentage misses one element*/
-  
 };
 
 exports.olCharPlayer = ()=> {
-let charArr = [];
-//let playerName = scrapeData('.PlayerHandle-handle',null);
-let championsPlayedArray = util.scrapeData('.Table-data.Table-data--extended.u-uppercase', null);
-let percentageChampPlayedArray = util.scrapeData('.Table-data.Table-data--emphasized.u-text-right.u-text-nowrap', null);
-let timeChampPlayedArray = util.scrapeData('.Table-data.u-text-right.u-text-nowrap', 's');
-let numbersStats10MinArray = ['damage', 'healing', 'finalBlows', 'elims', 'deaths']; // TODO:match numbersStatsArray with this array to get teach value on it's own.
-let scrapedNumbersStats10MinArray = util.scrapeData('.Table-data.u-text-right:not(.Table-data--emphasized):not(.u-text-nowrap)', null);
-                                                               //TODO:match numbersStatsArray with this array to get teach value on it's own.
-let numbersStatsLeagueRankArray = scrapeData('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)')
-  
+  util.setScrapeSource('./scrapeExamples/example.js');
+  let charArr = [];
+  let playerName = util.scrapeData('.PlayerHandle-handle',null);
+  let championsPlayedArray = util.scrapeData('.Table-data.Table-data--extended.u-uppercase', null);
+  let percentageChampPlayedArray = util.scrapeData('.Table-data.Table-data--emphasized.u-text-right.u-text-nowrap', null);
+  let timeChampPlayedArray = util.scrapeData('.Table-data.u-text-right.u-text-nowrap', 's');
+  let scrapedNumbersStats10MinArray = util.scrapeData('.Table-data.u-text-right:not(.Table-data--emphasized):not(.u-text-nowrap)', null);
+
+  console.log(scrapedNumbersStats10MinArray);
+  //                                                                    //TODO:match numbersStatsArray with this array to get teach value on it's own.
+//let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)')
+
   for (let i = 0; i < championsPlayedArray.length; i++) {
     charArr.push({
       name: championsPlayedArray[i].toLowerCase(),
@@ -48,7 +50,28 @@ let numbersStatsLeagueRankArray = scrapeData('.Table-data.Table-data--emphasized
       playPercentage: percentageChampPlayedArray[i]
     });
   }
-  console.log(charArr)
+  
+  player.stats.chars = charArr;
+
+  player.stats.damage.avgPerTenMin =       scrapedNumbersStats10MinArray[0];
+  player.stats.healing.avgPerTenMin =      scrapedNumbersStats10MinArray[1];
+  player.stats.finalBlows.avgPerTenMin =   scrapedNumbersStats10MinArray[2];
+  player.stats.eliminations.avgPerTenMin = scrapedNumbersStats10MinArray[3];
+  player.stats.deaths.avgPerTenMin =       scrapedNumbersStats10MinArray[4];
+  
+  for (let key in player.stats.chars) {
+    //console.log(key);
+    charArr.forEach((char) => {
+      //console.log(char.name);
+      (char.name === 'soldier: 76') ? char.name = 'soldier76': null;
+      if (key === char.name) {
+        player.stats.chars[key].timePlayed = char.timePlayed;
+        player.stats.chars[key].playPercentage = char.playPercentage;
+      }
+    });
+  }
+  console.log(player.stats.chars);
+  return player;
 };
 
 exports.akshonMatchTeam = () =>{

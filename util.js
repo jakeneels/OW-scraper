@@ -11,8 +11,27 @@ exports.setScrapeSource = (source) => {
   $ = cheerio.load(html);
 };
 
-//////////////pupeteer
-//////////////////////
+exports.scrapeData = function scrapeData(selector, onlyIncluding) {
+  let playerStatArray = [];
+  $(selector).each(function (i, e) {
+    let content = e.children[0].data;
+    
+    if (content != undefined) {
+      if (onlyIncluding != null) {
+        if (content.includes(onlyIncluding)) {
+          playerStatArray.push(content);
+        }
+      } else {
+        playerStatArray.push(content);
+      }
+    }
+  });
+  console.log(playerStatArray);
+  //console.log(playerStatArray);
+  return playerStatArray;
+};
+
+
 exports.getSourceCode = async (config) => {
   
   let url = config.url;
