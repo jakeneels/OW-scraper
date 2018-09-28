@@ -1,13 +1,18 @@
 'use strict';
 let player = require('./models/player.js');
 let team = require('./models/team.js');
+let util = require('./util.js')
 
 let scrape = require('./scrape.js');
-let team =require('./models/team.js');
+// let team =require('./models/team.js');
 
-let scrapeData = scrape.winstonCharPlayer();
- scrapeData = scrape.olCharPlayer();
- // scrapeData = scrape.akshonMatchTeam();
+// util.getSourceCode('https://overwatchleague.com/en-us/players/');
+
+// let scrapeData = scrape.winstonCharPlayer();
+//  scrapeData = scrape.olCharPlayer();
+
+let scrapeData = scrape.akshonMatchTeam();
+console.log(scrapeData)
 
 // let charArr = [];
 

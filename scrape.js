@@ -30,6 +30,12 @@ exports.winstonCharPlayer = () => {
   /*TODO:figure out why heroWinPercentage misses one element*/
 };
 
+
+/*
+OverWatch League
+*/
+
+
 exports.olCharPlayer = () => {
   util.getSourceCode({
     url: './asdf.js',
@@ -41,6 +47,7 @@ exports.olCharPlayer = () => {
   /**
    SCRAPED VARS
    */
+  
     //1 per player
   let playerName = util.scrapeData('.PlayerHandle-handle', null);
   let scrapedNumbersStats10MinArray = util.scrapeData('.Table-data.u-text-right:not(.Table-data--emphasized):not(.u-text-nowrap)', null);
@@ -50,7 +57,6 @@ exports.olCharPlayer = () => {
   let timeChampPlayedArray = util.scrapeData('.Table-data.u-text-right.u-text-nowrap', 's');
 //let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)');
 //TODO:match numbersStatsArray with this array to get teach value on it's own.
-
   
   for (let i = 0; i < championsPlayedArray.length; i++) {
     charArr.push({
@@ -84,15 +90,21 @@ exports.olCharPlayer = () => {
   return player;
 };
 
+
+/*
+action esports
+*/
 exports.akshonMatchTeam = () =>{
+  
+  util.setScrapeSource('./scrapeExamples/akshon.js');
   ///////helpers////////////////
-  let matchDiffPos = scrapeData('.border-right.positive > span', null);
-  let matchDiffNeg = scrapeData('.border-right.negative >span', null);
-  let mapDiffPos = scrapeData('.positive:not(.border-right) > span',null);
-  let mapDiffNeg = scrapeData('.negative:not(.border-right) > span',null);
+  let matchDiffPos = util.scrapeData('.border-right.positive > span', ['0', '2', '3']);
+  let matchDiffNeg = util.scrapeData('.border-right.negative > span', null);
+  let mapDiffPos = util.scrapeData('.positive:not(.border-right) > span', null);
+  let mapDiffNeg = util.scrapeData('.negative:not(.border-right) > span', null);
   let totalGames = '40';
   //////variables///////////////
-  let teams = scrapeData('.full-name',null);
+  let teams = util.scrapeData('.full-name', null);
   let matchDiff = matchDiffPos.concat(matchDiffNeg);
   let matchWinArr = [];
   for (let i = 0; i<matchDiff.length; i++){
@@ -105,5 +117,6 @@ exports.akshonMatchTeam = () =>{
     matchLossArr.push(matchLoss)
   }
   let matchMapDiff = mapDiffPos.concat(mapDiffNeg);
-}
+  
+};
 
