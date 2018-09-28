@@ -3,6 +3,12 @@ const util = require('./util.js');
 let player = require('./models/player.js');
 
 /////////////////////scrapeWinston'sLab
+exports.test = ()=>{
+util.setScrapeSource('./scrapeExamples/test.js');
+
+let loser = util.scrapeData('.overview-header-score-font > span' , '0'|| '1'|| '2'|| '3');
+console.log(loser);
+};
 
 exports.winstonCharPlayer = () => {
   util.setScrapeSource('./scrapeExamples/winston.js');
@@ -31,10 +37,8 @@ exports.winstonCharPlayer = () => {
 };
 
 exports.olCharPlayer = () => {
-  util.getSourceCode({
-    url: './asdf.js',
-    method: ''
-  })
+  // util.getSourceCode();
+  
   util.setScrapeSource('./scrapeExamples/overwatchLeague.js');
   let charArr = [];
   
@@ -44,13 +48,12 @@ exports.olCharPlayer = () => {
     //1 per player
   let playerName = util.scrapeData('.PlayerHandle-handle', null);
   let scrapedNumbersStats10MinArray = util.scrapeData('.Table-data.u-text-right:not(.Table-data--emphasized):not(.u-text-nowrap)', null);
+  let numbersStatsLeagueRankArray = util.scrapeData('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)');
   // one per char
   let championsPlayedArray = util.scrapeData('.Table-data.Table-data--extended.u-uppercase', null);
   let percentageChampPlayedArray = util.scrapeData('.Table-data.Table-data--emphasized.u-text-right.u-text-nowrap', null);
   let timeChampPlayedArray = util.scrapeData('.Table-data.u-text-right.u-text-nowrap', 's');
-//let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)');
-//TODO:match numbersStatsArray with this array to get teach value on it's own.
-
+  
   
   for (let i = 0; i < championsPlayedArray.length; i++) {
     charArr.push({
@@ -59,13 +62,17 @@ exports.olCharPlayer = () => {
       playPercentage: percentageChampPlayedArray[i]
     });
   }
-  
   player.name = playerName;
   player.stats.damage.avgPerTenMin = scrapedNumbersStats10MinArray[0];
   player.stats.healing.avgPerTenMin = scrapedNumbersStats10MinArray[1];
   player.stats.finalBlows.avgPerTenMin = scrapedNumbersStats10MinArray[2];
   player.stats.eliminations.avgPerTenMin = scrapedNumbersStats10MinArray[3];
-  player.stats.deaths.avgPerTenMin = scrapedNumbersStats10MinArray[4];
+  player.stats.deaths.leagueRank = scrapedNumbersStats10MinArray[4];
+  player.stats.damage.leagueRank = numbersStatsLeagueRankArray[0];
+  player.stats.healing.leagueRank = numbersStatsLeagueRankArray[1];
+  player.stats.finalBlows.leagueRank = numbersStatsLeagueRankArray[2];
+  player.stats.eliminations.leagueRank = numbersStatsLeagueRankArray[3];
+  player.stats.deaths.leagueRank = numbersStatsLeagueRankArray[4];
   
   player.stats.chars = charArr;
   
@@ -86,13 +93,15 @@ exports.olCharPlayer = () => {
 
 exports.akshonMatchTeam = () =>{
   ///////helpers////////////////
-  let matchDiffPos = scrapeData('.border-right.positive > span', null);
-  let matchDiffNeg = scrapeData('.border-right.negative >span', null);
-  let mapDiffPos = scrapeData('.positive:not(.border-right) > span',null);
-  let mapDiffNeg = scrapeData('.negative:not(.border-right) > span',null);
+  util.setScrapeSource('./scrapeExamples/akshon.js');
+  let matchDiffPos = util.scrapeData('.border-right.positive > span', null);
+  let matchDiffNeg = util.scrapeData('.border-right.negative >span', null);
+  let mapDiffPos = util.scrapeData('.positive:not(.border-right) > span',null);
+  let mapDiffNeg = util.scrapeData('.negative:not(.border-right) > span',null);
   let totalGames = '40';
+
   //////variables///////////////
-  let teams = scrapeData('.full-name',null);
+  let teams = util.scrapeData('.full-name',null);
   let matchDiff = matchDiffPos.concat(matchDiffNeg);
   let matchWinArr = [];
   for (let i = 0; i<matchDiff.length; i++){
@@ -106,4 +115,5 @@ exports.akshonMatchTeam = () =>{
   }
   let matchMapDiff = mapDiffPos.concat(mapDiffNeg);
 }
+
 

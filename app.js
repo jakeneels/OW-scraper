@@ -1,13 +1,38 @@
 'use strict';
 let player = require('./models/player.js');
 let team = require('./models/team.js');
-
+let util = require('./util.js');
 let scrape = require('./scrape.js');
-let team =require('./models/team.js');
+////let scrapeData = scrape.winstonCharPlayer();
+//let scrapeData = scrape.olCharPlayer();
+//let scrapeData = scrape.akshonMatchTeam();
 
-let scrapeData = scrape.winstonCharPlayer();
- scrapeData = scrape.olCharPlayer();
- // scrapeData = scrape.akshonMatchTeam();
+
+//util.getSourceCode('https://www.akshonesports.com/matches/owleague/13124/London-Spitfire-vs-Los-Angeles-Gladiators/game/1');
+//scrape.test();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // let charArr = [];
 

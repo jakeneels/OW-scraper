@@ -12,6 +12,7 @@ exports.setScrapeSource = (source) => {
 };
 
 exports.scrapeData = function scrapeData(selector, onlyIncluding) {
+  
   let playerStatArray = [];
   $(selector).each(function (i, e) {
     let content = e.children[0].data;
@@ -58,6 +59,7 @@ exports.getSourceCode = async (url) => {
   }
 
   let content = await page.content();
+  console.log(content);
   //
   //fs.writeFile("./AKSHON.html", content, function (err) {
   //  if (err) {
@@ -72,7 +74,7 @@ exports.getSourceCode = async (url) => {
 
 
 ///////////scraping function
-////////////////////////////
+//////////////////////////
 exports.scrapeData = function scrapeData(selector, onlyIncluding) {
   let result = [];
   $(selector).each(function (i, e) {
@@ -87,7 +89,7 @@ exports.scrapeData = function scrapeData(selector, onlyIncluding) {
       }
     }
   });
-  //console.log(result);
+  console.log(result);
   return result;
 };
 
