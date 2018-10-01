@@ -2,8 +2,10 @@
 const util = require('./util.js');
 let player = require('./models/player.js');
 
-/////////////////////scrapeWinston'sLab
 
+/*
+scrapeWinston'sLab
+*/
 exports.winstonCharPlayer = () => {
   util.setScrapeSource('./scrapeExamples/winston.js');
   
@@ -30,12 +32,9 @@ exports.winstonCharPlayer = () => {
   /*TODO:figure out why heroWinPercentage misses one element*/
 };
 
-
 /*
 OverWatch League
 */
-
-
 exports.olCharPlayer = () => {
 
   util.setScrapeSource('./scrapeExamples/overwatchLeague.js');
@@ -89,19 +88,19 @@ exports.olCharPlayer = () => {
 
 
 /*
-action esports
+AKSHON esports
 */
 exports.akshonMatchTeam = () =>{
-  
   util.setScrapeSource('./scrapeExamples/akshon.js');
   ///////helpers////////////////
-  let matchDiffPos = util.scrapeData('.border-right.positive > span', ['0', '2', '3']);
+  let matchDiffPos = util.scrapeData('.border-right.positive > span', null);
   let matchDiffNeg = util.scrapeData('.border-right.negative > span', null);
   let mapDiffPos = util.scrapeData('.positive:not(.border-right) > span', null);
   let mapDiffNeg = util.scrapeData('.negative:not(.border-right) > span', null);
   let totalGames = '40';
   //////variables///////////////
   let teams = util.scrapeData('.full-name', null);
+  console.log(teams);
   let matchDiff = matchDiffPos.concat(matchDiffNeg);
   let matchWinArr = [];
   for (let i = 0; i<matchDiff.length; i++){
@@ -113,7 +112,29 @@ exports.akshonMatchTeam = () =>{
     let matchLoss = (totalGames-(matchDiff[i])) / 2;
     matchLossArr.push(matchLoss)
   }
+  console.log(matchWinArr);
+  console.log(matchLossArr);
+  console.log(matchDiff);
   let matchMapDiff = mapDiffPos.concat(mapDiffNeg);
-  
+  console.log(matchMapDiff)
+  // TODO: WTF IS THE FUCKING UNDEFINED? ok, i am chill now.
 };
+
+/*
+AKSHON esports MAPS DATA
+*/
+exports.akshonMapTeam = ()=>{
+ util.setScrapeSource('./scrapeExamples/akshonMapTeam.js');
+ 
+};
+
+/*
+OL Team
+*/
+exports.OLTeam = ()=>{
+  util.setScrapeSource('./scrapeExamples/OLTeams.js');
+  let threeLetterTeamName =  util.scrapeData('.IconLabel-item.hidden-md.hidden-lg.hidden-xl > b')
+
+}
+
 

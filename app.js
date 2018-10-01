@@ -25,12 +25,7 @@ let  scrapeData = scrape.olCharPlayer();
 // delete scrapeData.name;
 
 
-// let charArr = [];
 
- // TODO:match numbersStatsArray with this array to get teach value on it's own.
-//let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)')
-
- //console.log(charArr);
 // for char per player, will be returned from scrape type function that deal with champ-> player relationship
 //for (let key in player.stats.chars) {
   ////console.log(key);
@@ -43,11 +38,7 @@ let  scrapeData = scrape.olCharPlayer();
 //    }
 //  });
 //}
-////console.log(player.stats.chars.genji)
 
-
-
-////////////////////////////////////////////////////////////////
 
 
 
