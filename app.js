@@ -3,43 +3,22 @@ let player = require('./models/player.js');
 let team = require('./models/team.js');
 let util = require('./util.js');
 let scrape = require('./scrape.js');
-////let scrapeData = scrape.winstonCharPlayer();
+
+
+ async  function main(){
+ await util.getSourceCode('https://overwatchleague.com/en-us/players');
+   }
+   //main();
+
+ //util.getSourceCode('https://overwatchleague.com/en-us/players/');
+// let scrapeData = scrape.winstonCharPlayer();
 //let scrapeData = scrape.olCharPlayer();
-//let scrapeData = scrape.akshonMatchTeam();
+//let scrapeData = scrape.akshonMapTeam();
+let scrapeData = scrape.OLTeam();
+
+ util.scrapeOLPlayerLinks();
 
 
-//util.getSourceCode('https://www.akshonesports.com/matches/owleague/13124/London-Spitfire-vs-Los-Angeles-Gladiators/game/1');
-//scrape.test();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let charArr = [];
-
- // TODO:match numbersStatsArray with this array to get teach value on it's own.
-//let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)')
-
- //console.log(charArr);
 // for char per player, will be returned from scrape type function that deal with champ-> player relationship
 //for (let key in player.stats.chars) {
   ////console.log(key);
@@ -52,11 +31,7 @@ let scrape = require('./scrape.js');
 //    }
 //  });
 //}
-////console.log(player.stats.chars.genji)
 
-
-
-////////////////////////////////////////////////////////////////
 
 
 

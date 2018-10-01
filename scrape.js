@@ -2,14 +2,10 @@
 const util = require('./util.js');
 let player = require('./models/player.js');
 
-/////////////////////scrapeWinston'sLab
-exports.test = ()=>{
-util.setScrapeSource('./scrapeExamples/test.js');
 
-let loser = util.scrapeData('.overview-header-score-font > span' , '0'|| '1'|| '2'|| '3');
-console.log(loser);
-};
-
+/*
+scrapeWinston'sLab
+*/
 exports.winstonCharPlayer = () => {
   util.setScrapeSource('./scrapeExamples/winston.js');
   
@@ -36,24 +32,30 @@ exports.winstonCharPlayer = () => {
   /*TODO:figure out why heroWinPercentage misses one element*/
 };
 
+/*
+OverWatch League
+*/
 exports.olCharPlayer = () => {
-  // util.getSourceCode();
-  
+  util.getSourceCode({
+    url: './asdf.js',
+    method: ''
+  })
   util.setScrapeSource('./scrapeExamples/overwatchLeague.js');
   let charArr = [];
   
   /**
    SCRAPED VARS
    */
+  
     //1 per player
   let playerName = util.scrapeData('.PlayerHandle-handle', null);
   let scrapedNumbersStats10MinArray = util.scrapeData('.Table-data.u-text-right:not(.Table-data--emphasized):not(.u-text-nowrap)', null);
-  let numbersStatsLeagueRankArray = util.scrapeData('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)');
   // one per char
   let championsPlayedArray = util.scrapeData('.Table-data.Table-data--extended.u-uppercase', null);
   let percentageChampPlayedArray = util.scrapeData('.Table-data.Table-data--emphasized.u-text-right.u-text-nowrap', null);
   let timeChampPlayedArray = util.scrapeData('.Table-data.u-text-right.u-text-nowrap', 's');
-  
+//let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)');
+//TODO:match numbersStatsArray with this array to get teach value on it's own.
   
   for (let i = 0; i < championsPlayedArray.length; i++) {
     charArr.push({
@@ -62,17 +64,13 @@ exports.olCharPlayer = () => {
       playPercentage: percentageChampPlayedArray[i]
     });
   }
+  
   player.name = playerName;
   player.stats.damage.avgPerTenMin = scrapedNumbersStats10MinArray[0];
   player.stats.healing.avgPerTenMin = scrapedNumbersStats10MinArray[1];
   player.stats.finalBlows.avgPerTenMin = scrapedNumbersStats10MinArray[2];
   player.stats.eliminations.avgPerTenMin = scrapedNumbersStats10MinArray[3];
-  player.stats.deaths.leagueRank = scrapedNumbersStats10MinArray[4];
-  player.stats.damage.leagueRank = numbersStatsLeagueRankArray[0];
-  player.stats.healing.leagueRank = numbersStatsLeagueRankArray[1];
-  player.stats.finalBlows.leagueRank = numbersStatsLeagueRankArray[2];
-  player.stats.eliminations.leagueRank = numbersStatsLeagueRankArray[3];
-  player.stats.deaths.leagueRank = numbersStatsLeagueRankArray[4];
+  player.stats.deaths.avgPerTenMin = scrapedNumbersStats10MinArray[4];
   
   player.stats.chars = charArr;
   
@@ -91,17 +89,21 @@ exports.olCharPlayer = () => {
   return player;
 };
 
-exports.akshonMatchTeam = () =>{
-  ///////helpers////////////////
-  util.setScrapeSource('./scrapeExamples/akshon.js');
-  let matchDiffPos = util.scrapeData('.border-right.positive > span', null);
-  let matchDiffNeg = util.scrapeData('.border-right.negative >span', null);
-  let mapDiffPos = util.scrapeData('.positive:not(.border-right) > span',null);
-  let mapDiffNeg = util.scrapeData('.negative:not(.border-right) > span',null);
-  let totalGames = '40';
 
+/*
+AKSHON esports
+*/
+exports.akshonMatchTeam = () =>{
+  util.setScrapeSource('./scrapeExamples/akshon.js');
+  ///////helpers////////////////
+  let matchDiffPos = util.scrapeData('.border-right.positive > span', null);
+  let matchDiffNeg = util.scrapeData('.border-right.negative > span', null);
+  let mapDiffPos = util.scrapeData('.positive:not(.border-right) > span', null);
+  let mapDiffNeg = util.scrapeData('.negative:not(.border-right) > span', null);
+  let totalGames = '40';
   //////variables///////////////
-  let teams = util.scrapeData('.full-name',null);
+  let teams = util.scrapeData('.full-name', null);
+  console.log(teams);
   let matchDiff = matchDiffPos.concat(matchDiffNeg);
   let matchWinArr = [];
   for (let i = 0; i<matchDiff.length; i++){
@@ -113,7 +115,29 @@ exports.akshonMatchTeam = () =>{
     let matchLoss = (totalGames-(matchDiff[i])) / 2;
     matchLossArr.push(matchLoss)
   }
+  console.log(matchWinArr);
+  console.log(matchLossArr);
+  console.log(matchDiff);
   let matchMapDiff = mapDiffPos.concat(mapDiffNeg);
+  console.log(matchMapDiff)
+  // TODO: WTF IS THE FUCKING UNDEFINED? ok, i am chill now.
+};
+
+/*
+AKSHON esports MAPS DATA
+*/
+exports.akshonMapTeam = ()=>{
+ util.setScrapeSource('./scrapeExamples/akshonMapTeam.js');
+ 
+};
+
+/*
+OL Team
+*/
+exports.OLTeam = ()=>{
+  util.setScrapeSource('./scrapeExamples/OLTeams.js');
+  let threeLetterTeamName =  util.scrapeData('.IconLabel-item.hidden-md.hidden-lg.hidden-xl > b')
+
 }
 
 
