@@ -37,10 +37,7 @@ OverWatch League
 
 
 exports.olCharPlayer = () => {
-  util.getSourceCode({
-    url: './asdf.js',
-    method: ''
-  })
+
   util.setScrapeSource('./scrapeExamples/overwatchLeague.js');
   let charArr = [];
   
@@ -55,7 +52,7 @@ exports.olCharPlayer = () => {
   let championsPlayedArray = util.scrapeData('.Table-data.Table-data--extended.u-uppercase', null);
   let percentageChampPlayedArray = util.scrapeData('.Table-data.Table-data--emphasized.u-text-right.u-text-nowrap', null);
   let timeChampPlayedArray = util.scrapeData('.Table-data.u-text-right.u-text-nowrap', 's');
-//let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)');
+  let numbersStatsLeagueRankArray = scrapeCharsDataOL('.Table-data.Table-data--emphasized.u-text-right:not(.u-text-nowrap)');
 //TODO:match numbersStatsArray with this array to get teach value on it's own.
   
   for (let i = 0; i < championsPlayedArray.length; i++) {
@@ -86,7 +83,7 @@ exports.olCharPlayer = () => {
       }
     });
   }
-  console.log('test ' + JSON.stringify(player));
+  console.log('pushing ' + JSON.stringify(player.name));
   return player;
 };
 

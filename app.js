@@ -1,18 +1,29 @@
 'use strict';
 let player = require('./models/player.js');
 let team = require('./models/team.js');
-let util = require('./util.js')
+let util = require('./util.js');
+const players = require('./Players.json');
+const JsonDB = require('node-json-db');
+const db = new JsonDB("Players", true, true);
+
 
 let scrape = require('./scrape.js');
 // let team =require('./models/team.js');
 
-// util.getSourceCode('https://overwatchleague.com/en-us/players/');
 
 // let scrapeData = scrape.winstonCharPlayer();
-//  scrapeData = scrape.olCharPlayer();
 
-let scrapeData = scrape.akshonMatchTeam();
-console.log(scrapeData)
+util.getSourceCode();
+let  scrapeData = scrape.olCharPlayer();
+
+ db.push("/" + playerName, scrapeData, false);
+// util.getSourceCode('https://overwatchleague.com/en-us/players');
+
+
+// let scrapeData = scrape.olCharPlayer();
+// let playerName = scrapeData.name;
+// delete scrapeData.name;
+
 
 // let charArr = [];
 
