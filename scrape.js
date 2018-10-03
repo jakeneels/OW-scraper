@@ -1,7 +1,7 @@
 'use strict';
 const util = require('./util.js');
 let player = require('./models/player.js');
-
+const cheerio = require('cheerio');
 
 /*
 scrapeWinston'sLab
@@ -126,6 +126,22 @@ AKSHON esports MAPS DATA
 exports.akshonMapTeam = ()=>{
  util.setScrapeSource('./scrapeExamples/akshonMapTeam.js');
  
+};
+
+exports.scrapeOLPlayerLinks = (path)=>{
+ let html = require(path);
+  let $ = cheerio.load(html);
+  let  result = [];
+  console.log('linkss');
+  $('.sorting_1 > a[href]').each((index, elem)=>{
+    if($(elem).attr('href').includes('players'))
+    {
+      result.push($(elem).attr('href'))
+    }
+    // console.log(index, $(elem).attr('href'));
+  });
+  console.log(result)
+  return result;
 };
 
 /*
