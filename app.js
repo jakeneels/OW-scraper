@@ -2,30 +2,39 @@
 let player = require('./models/player.js');
 let team = require('./models/team.js');
 let util = require('./util.js');
-const players = require('./Players.json');
+// const players = require('./Players.json');
 const JsonDB = require('node-json-db');
 const db = new JsonDB("Players", true, true);
-
 
 let scrape = require('./scrape.js');
 // let team =require('./models/team.js');
 
-
 // let scrapeData = scrape.winstonCharPlayer();
-async function main() {
-  for (let i = 1; i <= 4; i++) {
-    let playerlinks = await scrape.scrapeOLPlayerLinks(`./players${i}.js`);
+ function main() {
+  let scrapeData;
+  for (let i = 1; i <= 1; i++) {
+    let playerlinks =  scrape.scrapeOLPlayerLinks(`./players${i}.js`);
     
-    playerlinks.forEach(async (query) => {
+    playerlinks.forEach((query) => {
+
+      let code = util.getSourceCode('https://overwatchleague.com/en-us' + query).then(()=>{
+        console.log(code.substring(0,99));
+        
+        
+        console.log(scrapeData)
+      });
+  
       
-      let code = await util.getSourceCode('https://overwatchleague.com/en-us/' + query);
-      setTimeout(await util.setScrapeSource(code), 6000);
-      let scrapeData = scrape.olCharPlayer();
+        // setTimeout(()=>{scrapeData =  scrape.olCharPlayer()} ,10000);
+        
       
-      db.push("/" + playerName, scrapeData, false);
+  
+      
+
     });
   }
 }
+
 main();
 // util.getSourceCode('https://overwatchleague.com/en-us/players');
 

@@ -3,6 +3,7 @@ const util = require('./util.js');
 let player = require('./models/player.js');
 const cheerio = require('cheerio');
 
+
 /*
 scrapeWinston'sLab
 */
@@ -37,7 +38,6 @@ OverWatch League
 */
 exports.olCharPlayer = () => {
 
-  util.setScrapeSource('./scrapeExamples/overwatchLeague.js');
   let charArr = [];
   
   /**
@@ -140,7 +140,7 @@ exports.scrapeOLPlayerLinks = (path)=>{
     }
     // console.log(index, $(elem).attr('href'));
   });
-  console.log(result)
+  console.log(result);
   return result;
 };
 

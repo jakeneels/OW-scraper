@@ -4,10 +4,19 @@ const puppeteer = require('puppeteer');
 let fs = require('fs');
 let html;
 let $;
+let scrape = require('./scrape.js');
+
+const JsonDB = require('node-json-db');
+const db = new JsonDB("Players", true, true);
 
 /*
 set source code for scrape element*/
 exports.setScrapeSource = (source) => {
+  html = require(source);
+  $ = cheerio.load(html);
+};
+
+function setScrapeSource(source) {
   html = require(source);
   $ = cheerio.load(html);
 };
@@ -44,6 +53,7 @@ get source code from website through puppeteer browser
 */
 exports.getSourceCode = async (url) => {
   let method;
+  let content;
   if (url === 'https://overwatchleague.com/en-us/players') {
     method = 'olGetAllPlayerLinks';
   } else if (url.includes('https://overwatchleague.com/en-us/players/')) {
@@ -54,21 +64,26 @@ exports.getSourceCode = async (url) => {
     method = 'default';
   }
   
-  const browser = await puppeteer.launch({headless: true});
+  const browser = await puppeteer.launch({headless: false});
+  
+  
   const page = await browser.newPage();
-  await page.goto(url, {waitUntil: 'networkidle2'});
+  await page.goto(url, {waitUntil: 'networkidle2', timeout: 3000000});
   
   switch (method) {
     
     case 'olPlayer':
       await page.click('.Button--secondary');
-      await page.waitFor(3000);
-      break;
+      console.log('clicked button::: ');
       
+      await page.waitFor(500);
+      console.log('waited 500 ');
+       content = await page.content();
+      console.log('got page content::: ');
+      break;
       
     case 'winstonPlayer':
       break;
-      
       
     case 'olGetAllPlayerLinks':
       // for (let i = 1; i <= 4; i++) { // todo cannot select the next page atm
@@ -86,7 +101,13 @@ exports.getSourceCode = async (url) => {
   
   
   await browser.close();
-  // return content;
+  console.log('closed browser::: ');
+  await setScrapeSource(content);
+  console.log(content.substring(0,99));
+  let scrapeData = await scrape.olCharPlayer();
+  console.log('Scrape DATA $%$%');
+   db.push("/" + scrapeData.name , scrapeData, false);
+  return content;
 };
 
 /*
