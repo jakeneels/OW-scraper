@@ -10,32 +10,24 @@ let scrape = require('./scrape.js');
 // let team =require('./models/team.js');
 
 // let scrapeData = scrape.winstonCharPlayer();
- function main() {
+ async function main() {
   let scrapeData;
   for (let i = 1; i <= 1; i++) {
-    let playerlinks =  scrape.scrapeOLPlayerLinks(`./players${i}.js`);
+     let playerlinks = ['/players/3985/akm'];/* scrape.scrapeOLPlayerLinks(`./players${i}.js`);*/
     
-    playerlinks.forEach((query) => {
+    playerlinks.forEach(async (query) => {
 
-      let code = util.getSourceCode('https://overwatchleague.com/en-us' + query).then(()=>{
-        console.log(code.substring(0,99));
-        
-        
-        console.log(scrapeData)
+      let code = await util.getSourceCode('https://overwatchleague.com/en-us' + query);
+        // console.log(code.substring(0,50));
+
+        // console.log(scrapeData);
+          console.log('shis done');
       });
-  
-      
         // setTimeout(()=>{scrapeData =  scrape.olCharPlayer()} ,10000);
-        
-      
-  
-      
-
-    });
   }
 }
 
-main();
+ main();
 // util.getSourceCode('https://overwatchleague.com/en-us/players');
 
 

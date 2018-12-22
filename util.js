@@ -17,8 +17,7 @@ exports.setScrapeSource = (source) => {
 };
 
 function setScrapeSource(source) {
-  html = require(source);
-  $ = cheerio.load(html);
+  $ = cheerio.load(source);
 };
 
 
@@ -78,7 +77,7 @@ exports.getSourceCode = async (url) => {
       
       await page.waitFor(500);
       console.log('waited 500 ');
-       content = await page.content();
+      content = await page.content();
       console.log('got page content::: ');
       break;
       

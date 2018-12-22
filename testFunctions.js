@@ -44,7 +44,7 @@ let totalGames = '40';
 ///////////////
 let teams = scrapeAkshon('.full-name',null);
 let matchDiff = matchDiffPos.concat(matchDiffNeg);
-let matchWinArr = []
+let matchWinArr = [];
 for (let i =0;i<matchDiff.length;i++){
   let matchWin = totalGames- (totalGames-(matchDiff[i])) /2
   matchWinArr.push(matchWin)
@@ -75,17 +75,6 @@ for (let i = 0; i < championsPlayedArray.length; i++) {
     smth2:mapDiff[i]
   });
 }
-
-
-
-
-
-
-
-
-
-
-
 
 ///////////scraping function
 ////////////////////////////
