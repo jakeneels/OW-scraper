@@ -13,7 +13,7 @@ const $ = cheerio.load(html);
 //pullFromURL()
 async function pullFromURL() {
   const browser = await puppeteer.launch({headless: false});
-  const page = await browser.newPage()
+  const page = await browser.newPage();
   
   await page.goto(url, {waitUntil: 'networkidle2'});
   await page.waitFor(200000);
